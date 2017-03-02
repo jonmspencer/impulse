@@ -1,0 +1,207 @@
+// Curtain
+@mixin curtain($position: fixed) {
+  background-color: rgba(invert($background), 0.9);
+  bottom: 0;
+  display: none;
+  height: 100%;
+  left: 0;
+  position: $position;
+  top: 0;
+  width: 100%;
+  z-index: 9;
+}
+
+.curtain {
+  @include curtain;
+}
+
+// Modal
+@mixin modal {
+  @include horizontal-center;
+  background-color: $background;
+  display: none;
+  max-width: $phone;
+  padding: 60px;
+  top: $double-space;
+  width: 100%;
+  z-index: 10;
+
+  // Secondary Mobile - Phone & Below
+  @media screen and (max-width: $phone) {
+    top: 0;
+  } // End Secondary Mobile
+} // End modal
+
+.modal {
+  @include modal;
+}
+
+// Wrap
+@mixin wrap($width: 90%) {
+  @include better-box(block);
+  margin-left: auto;
+  margin-right: auto;
+  width: $width;
+} // End wrap
+
+.wrap {
+  @include wrap;
+}
+
+@mixin inner-wrap {
+  @include wrap;
+  max-width: 510px;
+
+  // Secondary Mobile - Phone & Below
+  @media screen and (max-width: $phone) {
+    max-width: 100%;
+  } // End Phone & Below
+} // End inner-wrap mixin
+
+.inner-wrap {
+  @include inner-wrap;
+}
+
+@mixin larger {
+  font-size: 1.125em;
+}
+
+.larger {
+  @include larger;
+}
+
+// Buttons
+@mixin cta {
+  @include better-box;
+  background-color: $callout;
+  border: 1px solid $callout;
+  border-radius: $border-radius;
+  color: $white;
+  cursor: pointer;
+  font-family: $font-light;
+  font-size: 1em;
+  letter-spacing: 0.025em;
+  line-height: 140%;
+  padding: 0.875em 1.625em;
+
+  span, svg {
+    @include better-box;
+    float: left;
+  }
+
+  svg {
+    height: 0.9em;
+    margin-left: $nano-space;
+    width: 0.9em;
+
+    & use {
+      fill: none;
+      stroke: $white;
+      stroke-width: 3;
+      stroke-linecap: round;
+    }
+  }
+
+  &.cta-small {
+    font-size: 0.75em;
+    letter-spacing: 0.05em;
+    margin-bottom: $half-space;
+    padding: 0.655em 1.5em;
+    text-transform: uppercase;
+  }
+
+  &.cta-large {
+    font-size: 1.188em;
+    min-width: 320px;
+    padding: 1.5em 3em;
+  }
+
+  &.icon-cta {
+    svg {
+      @include better-box;
+      height: 1em;
+      display: inline-block;
+      position: absolute;
+      right: 1em;
+      top: 1em;
+      width: 1em;
+
+      &, use {
+        stroke: $white;
+        stroke-width: 2.5;
+      }
+    } // End svg
+  } // End &.icon-cta
+
+  &:hover {
+    background-color: $callout-hover;
+  }
+
+  &.destroy {
+    background-color: $error;
+    border-color: $error;
+
+    &:hover {
+      background-color: $error-hover;
+    }
+  } // End &-destroy
+} // End cta mixin
+
+a.cta {
+  @include cta;
+}
+
+// Add New Button
+@mixin add-new($color: $brand, $hover-color: $brand-ter) {
+  padding: 0.5em 0;
+
+  // Secondary Mobile - Phone & Below
+  @media screen and (max-width: $phone) {
+    padding: 0.1em 0;
+  } // End Phone & Below
+
+  &, .icon {
+    @include animate;
+    @include better-box(flex);
+    align-items: center;
+    color: $color;
+    font-family: $font-light;
+    text-align: center;
+  }
+
+  .icon {
+    background-color: rgba($color, 0.1);
+    border-radius: 100%;
+    height: 2.25em;
+    margin-left: $nano-space;
+    width: 2.25em;
+
+    &-symbol {
+      display: block;
+      font-size: 1.2em;
+      letter-spacing: 0.075em;
+      margin: 0 auto;
+    }
+  } // End .icon
+
+  .text {
+    // Secondary Mobile - Phone & Below
+    @media screen and (max-width: $phone) {
+      display: none;
+    } // End Phone & Below
+  }
+
+  &:hover {
+    &, .icon {
+      color: $hover-color;
+    }
+
+    .icon {
+      background-color: rgba($hover-color, 0.1);
+    }
+  }
+} // End add-new
+
+a.add-new {
+  @include add-new;
+}

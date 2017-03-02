@@ -1,0 +1,103 @@
+footer {
+  @include full-box(table);
+  background-color: $border-color;
+  padding: 0 5%;
+  text-transform: uppercase;
+  z-index: 2;
+
+  // Secondary Mobile - Phone & Below
+  @media screen and (max-width: $phone) {
+    background-color: rgba($background, 0);
+    text-align: center;
+    padding-bottom: $space;
+    padding-top: $half-space;
+  } // End Phone & Below
+
+  &, a {
+    // Secondary Mobile - Phone & Below
+    @media screen and (max-width: $phone) {
+      color: darken($type-alt, 10%);
+    } // End Phone & Below
+  }
+
+  a {
+    @include nav-link;
+    @include better-box;
+    float: left;
+
+    // Secondary Mobile - Phone & Below
+    @media screen and (max-width: $phone) {
+      float: none;
+    } // End Phone & Below
+
+    &.logo {
+      padding: 1.75em 0;
+      width: auto;
+
+      // Secondary Mobile - Phone & Below
+      @media screen and (max-width: $phone) {
+        font-size: 0.875em;
+        margin-bottom: $minor-space;
+        padding-bottom: 1em;
+      } // End Phone & Below
+
+      svg, span {
+        @include better-box;
+        float: left;
+
+        // Secondary Mobile - Phone & Below
+        @media screen and (max-width: $phone) {
+          @include full-box;
+          color: $type;
+        } // End Phone & Below
+      }
+
+      svg {
+        // Only Tablet & Above - No Mobile Phone
+        @media screen and (min-width: $phone) {
+          filter: grayscale(100%);
+        } // End Tablet & Above
+
+        &, use {
+          // Secondary Mobile - Phone & Below
+          @media screen and (max-width: $phone) {
+            height: 1.25em;
+            width: 1.25em;
+          } // End Phone & Below
+        }
+      } // End svg
+    } // End .logo
+  } // End a
+
+  nav {
+    @include better-box;
+    float: right;
+
+    // Secondary Mobile - Phone & Below
+    @media screen and (max-width: $phone) {
+      @include full-box;
+    } // End Phone & Below
+
+    a {
+      padding: 2em $half-space;
+
+      // Secondary Mobile - Phone & Below
+      @media screen and (max-width: $phone) {
+        @include full-box;
+        font-size: 1em;
+        padding: $half-space;
+      } // End Phone & Below
+
+      &:hover {
+        color: $type;
+      }
+
+      &:last-of-type {
+        // Only Tablet & Above - No Mobile Phone
+        @media screen and (min-width: $phone) {
+          padding-right: 0;
+        } // End Tablet & Above
+      } // End &:last-of-type
+    }
+  } // End nav
+} // End footer

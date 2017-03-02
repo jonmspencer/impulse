@@ -1,0 +1,8 @@
+body.application {
+  padding-left: $navigation-width;
+
+  // Primary Mobile - Tablet & Below
+  @media screen and (max-width: $tablet) {
+    padding-left: 0;
+  } // End Tablet & Below
+} // End body.application

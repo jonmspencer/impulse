@@ -1,0 +1,25 @@
+.content {
+
+  ul, ol {
+    @include full-box;
+    margin-bottom: $minor-space;
+
+    li {
+      @include full-box(list-item);
+      line-height: 160%;
+    }
+  }
+
+  ul {
+    li {
+      list-style: disc;
+      margin-bottom: $micro-space;
+      margin-left: $minor-space;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+} // End .content

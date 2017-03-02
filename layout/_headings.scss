@@ -1,0 +1,42 @@
+h1, h2, h3, h5 {
+  color: $background;
+}
+
+h1 {
+  font-family: $font-light;
+  font-size: 3em;
+  margin-bottom: $minor-space;
+
+  // Secondary Mobile - Phone & Below
+  @media screen and (max-width: $phone) {
+    font-size: 2.4em;
+  } // End Phone & Below
+}
+
+h2, h3, h5 {
+  line-height: 140%;
+}
+
+h2 {
+  font-size: 1.875em;
+  margin-bottom: $space;
+}
+
+h3, h4 {
+  font-size: 1.1875em;
+  margin-bottom: $minor-space;
+}
+
+h4 {
+  color: $type;
+  font-family: $font-light;
+  line-height: 120%;
+}
+
+h5 {
+  @include full-box;
+  border-bottom: 1px solid $border-color;
+  font-size: 1em;
+  margin: $space 0;
+  padding-bottom: $micro-space;
+}

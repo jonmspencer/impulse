@@ -1,0 +1,263 @@
+@mixin label {
+  @include full-box;
+  color: rgba($type, 0.5);
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+  line-height: 140%;
+  margin-bottom: $micro-space;
+  text-transform: uppercase;
+} // End label mixin
+
+@mixin form-element {
+  @include browser-prefix(appearance, none);
+  background-color: $white;
+  border: 1px solid $form-element-border;
+  border-radius: $border-radius;
+  display: inline-block;
+  color: $type;
+  font-family: $font;
+  font-size: 1em;
+  line-height: 140%;
+  margin-bottom: $half-space;
+  padding: 0.875em 1.250em;
+  width: 100%;
+} // End form-element mixin
+
+// Pseudo Box for Checkboxes and Radio Buttons
+@mixin pseudo-box($border-radius: 10em) {
+  display: none;
+
+  & + label {
+    font-size: 1em;
+    color: $type;
+    letter-spacing: normal;
+    line-height: 1.4;
+    margin-right: $half-space;
+    padding-left: 2em;
+    text-transform: none;
+    width: auto;
+
+    &:before {
+      background-color: $white;
+      border: 1px solid $form-element-border;
+      border-radius: $border-radius;
+      box-sizing: border-box;
+      content: "";
+      display: inline-block;
+      height: 1.35em;
+      left: 0;
+      position: absolute;
+      width: 1.35em;
+    }
+  } // End & + label
+
+  &:checked + label:before {
+    border: 0.45em solid $brand-ter;
+  }
+}
+
+label, .label {
+  @include label;
+}
+
+label {
+  a {
+    color: $callout;
+    float: right;
+  }
+} // End label
+
+input {
+  &:disabled {
+    opacity: 0.3;
+  }
+
+  &[type="date"],
+  &[type="text"],
+  &[type="tel"],
+  &[type="email"],
+  &[type="password"],
+  &[type="number"],
+  &[type="search"] {
+    @include form-element;
+  }
+
+  &[type="checkbox"] {
+    @include pseudo-box($border-radius);
+
+    &:checked + label {
+      &:before {
+        background-image: asset-url("check.svg");
+        background-color: $brand-ter;
+        background-repeat: no-repeat;
+        background-position: center 0.05em;
+        border-width: 0.35em;
+      }
+    }
+  } // End &[type="radio"]
+
+  &[type="radio"] {
+    @include pseudo-box;
+  } // End &[type="radio"]
+
+  &[type="search"] {
+    padding-left: 2.5em;
+    position: relative;
+
+    &.search-alt {
+      background-color: rgba($white, 0);
+      border-color: $border-color;
+    }
+  } // End &[type="search"]
+
+  &[type="file"] {
+    @include browser-prefix(appearance, none);
+    font-size: 1em;
+    margin-bottom: $minor-space;
+  } // End &[type="file"]
+
+  &[type="submit"] {
+    @include cta;
+    @include browser-prefix(appearance, none);
+
+    // Secondary Mobile - Phone & Below
+    @media screen and (max-width: $phone) {
+      @include full-box;
+    } // End Phone & Below
+  } // End &[type="submit"]
+} // End input
+
+select {
+  @include form-element;
+  background-image: asset-url("arrow-down.svg");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 1.6em;
+} // End select
+
+.radio-container, .checkbox-container {
+  > label {
+    @include no-select;
+    cursor: pointer;
+    margin: $micro-space;
+    margin-left: 0;
+  }
+
+  &.text {
+    @include full-box;
+
+    label {
+      float: left;
+      margin-right: 0;
+      min-height: 1.4em;
+    }
+
+    input {
+      &[type="text"] {
+        @include better-box;
+        float: left;
+        width: 80%;
+      }
+    } // End input
+  } // End .text
+} // End .radio-container
+
+.input-container {
+  @include full-box;
+  clear: none;
+  margin-bottom: $half-space;
+
+  &-half {
+    @include better-box;
+    float: left;
+    width: 50%;
+
+    > .radio-container {
+      margin-bottom: $half-space;
+
+      > label {
+        margin-bottom: 0.95rem;
+        margin-top: 0.95rem;
+
+        // Primary Mobile - Tablet & Below
+        @media screen and (max-width: $tablet) {
+          margin-bottom: 0.89rem;
+          margin-top: 0.89rem;
+        } // End Tablet & Below
+      }
+    }
+
+    &:nth-of-type(odd) {
+      clear: left;
+      padding-right: 2.5%;
+    }
+
+    &:nth-of-type(even) {
+      padding-left: 2.5%;
+    }
+  }
+
+  &.error {
+    label {
+      color: $error;
+    }
+
+    input, select {
+      &.error {
+        border-color: $error;
+      }
+    } // End input, select
+  } // End &.error
+} // End .input-container
+
+.form-footer {
+  margin-bottom: $space;
+  margin-top: $micro-space;
+
+  &, .cta {
+    @include full-box;
+  }
+
+  .cta {
+    text-align: center;
+  }
+
+  .status {
+    @include label;
+    float: right;
+    margin: 0;
+    padding: 1.4em 0;
+    width: auto;
+
+    // Secondary Mobile - Phone & Below
+    @media screen and (max-width: $phone) {
+      @include full-box;
+      text-align: center;
+    } // End Phone & Below
+
+    &.error {
+      color: $error;
+    }
+  } // End .status
+} // End .form-footer
+
+// Short Inputs
+input, select {
+  &.short-input {
+    width: $short-input;
+  } // End .short-input
+
+  &.remainder-input {
+    width: calc(100% - #{$short-input});
+
+    &.left {
+      margin-right: 1em;
+      width: calc(100% - #{$short-input} - 1em);
+    }
+
+    &.right {
+      margin-left: 1em;
+      width: calc(100% - #{$short-input} - 1em);
+    }
+  } // End .remainder-input
+} // End consolidations
