@@ -1,0 +1,68 @@
+@mixin menu-button($color: $foreground) {
+  @include animate;
+  @include better-box(none);
+  background-color: transparent;
+  cursor: pointer;
+  float: right;
+  padding: 24px 0;
+  z-index: 9;
+
+  // Secondary Mobile - Phone & Below
+  @media screen and (max-width: $phone){
+    @include better-box;
+  } // End Phone & Below
+
+  &.open {
+    .lines {
+      background-color: transparent;
+
+      &:before, &:after {
+        top: 0;
+      }
+
+      &:before {
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+
+      &:after {
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+      }
+    } // END .lines
+  } // END .menu-button.open
+
+  .lines {
+    background-color: $color;
+    border-radius: 2px;
+    display: block;
+    height: 4px;
+    position: relative;
+    transition: all 0.3s ease 0s;
+    width: 27px;
+
+    &:before, &:after {
+      background-color: $color;
+      border-radius: 2px;
+      content: '';
+      display: inline-block;
+      height: 4px;
+      left: 0;
+      position: absolute;
+      transition: 0.3s;
+      width: 27px;
+    }
+
+    &:before {
+      top: 8px;
+    }
+
+    &:after {
+      top: -8px;
+    }
+  } // END .lines
+} // End menu-button
+
+a.menu-button {
+  @include menu-button;
+} // END .menu-button
